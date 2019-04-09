@@ -2,22 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour {
+public class Enemy : MonoBehaviour
+{
 
     public float speed;
     public float health;
     public int score;
+  
+    public GameObject manager;
 
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         Move();
-	}
+
+        if ((transform.position.y < -5))
+        {
+            manager.SendMessage("life");
+       
+            Destroy(this.gameObject);
+        }
+    }
 
     protected virtual void Move()
     {
@@ -25,10 +37,10 @@ public class Enemy : MonoBehaviour {
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        PowerUp pu;
-        Destroy(collision.gameObject);
         
 
-        
+
+
+
     }
 }

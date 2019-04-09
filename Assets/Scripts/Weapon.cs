@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum WeaponStyle { none, blaster, spread, laser, tight, mine }
+public enum WeaponStyle { none, blaster }
 
 [System.Serializable]
 public class WeaponDefinition
@@ -42,6 +42,9 @@ public class Weapon : MonoBehaviour
         collar.GetComponent<Renderer>().material.color = def.color;
     }
 
+
+
+
     // Use this for initialization
     void Start()
     {
@@ -57,7 +60,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    //// Update is called once per frame
+    // Update is called once per frame
     //void Update()
     //{
     //    if (Input.GetKey(KeyCode.Space))
@@ -78,69 +81,25 @@ public class Weapon : MonoBehaviour
         {
             case WeaponStyle.blaster:
                 p = MakeProjectile();
-                p.rb.velocity = def.velocity * Vector2.up;
+                p.rb.velocity = def.velocity * transform.up;
                 audio.Play();
                 break;
-            case WeaponStyle.spread:
-                p = MakeProjectile();
-                p.rb.velocity = def.velocity * Vector2.up;
-                audio.Play();
-                p = MakeProjectile();
-                p.rb.velocity = Quaternion.Euler(0f, 0f, -80f) * Vector3.up * def.velocity;
-                audio.Play();
-                //p.rb.velocity = Quaternion.AngleAxis(-45, Vector3.up) * Vector2.up * def.velocity;
-                p = MakeProjectile();
-                p.rb.velocity = Quaternion.Euler(0f, 0f, 80f) * Vector2.up * def.velocity;
-                audio.Play();
-                break;
-            case WeaponStyle.laser:
-                p = MakeProjectile();
-                p.rb.velocity = def.velocity * Vector2.up;
-                audio.pitch = 2.5f;
-                audio.Play();
-                break;
-            case WeaponStyle.tight:
-                p = MakeProjectile();
-                p.rb.velocity = def.velocity * Vector2.up;
-                audio.Play();
-                p = MakeProjectile();
-                p.rb.velocity = Quaternion.Euler(0f, 0f, -40f) * Vector3.up * def.velocity;
-                audio.Play();
-                //p.rb.velocity = Quaternion.AngleAxis(-45, Vector3.up) * Vector2.up * def.velocity;
-                p = MakeProjectile();
-                p.rb.velocity = Quaternion.Euler(0f, 0f, 40f) * Vector2.up * def.velocity;
-                audio.Play();
-                break;
-            case WeaponStyle.mine:
-                p = MakeProjectile();
-                p.rb.velocity = def.velocity * Vector2.up;
-                audio.Play();
-                break;
-
-
         }
-    }
 
-    public Projectile MakeProjectile()
-    {
-        GameObject go = Instantiate(def.projectilePrefab, spawnPoint.position, Quaternion.identity);
-        //set the layer!
-        Projectile p = go.GetComponent<Projectile>();
-        p.style = style;
-        lastShotTime = Time.time;
-        go.layer = LayerMask.NameToLayer("Hero Projectile");
-        return (p);
-    }
 
-    public PowerUp Makepowerup()
-    {
-        GameObject go = Instantiate(def.Powerupprefab, spawnPoint.position, Quaternion.identity);
         
-        //set the layer!
-        PowerUp pu = go.GetComponent<PowerUp>();
-        pu.style = style;
-        
-        go.layer = LayerMask.NameToLayer("Enemy Projectile");
-        return (pu);
-    }
 }
+
+public Projectile MakeProjectile()
+{
+    GameObject go = Instantiate(def.projectilePrefab, spawnPoint.position, Quaternion.identity);
+    //set the layer! 
+    Projectile p = go.GetComponent<Projectile>();
+    p.style = style;
+    lastShotTime = Time.time;
+    go.layer = LayerMask.NameToLayer("HeroProjectile");
+    return (p);
+}
+
+}
+

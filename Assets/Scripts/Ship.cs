@@ -5,12 +5,13 @@ using UnityEngine;
 public class Ship : MonoBehaviour
 {
 
-    public float speed = 30f;
-    public float rollMult = -45;
-    public float pitchMult = 30;
+    public float speed = .1f;
+    public float tilt = 360.0f;
+    float tiltMe = 0;
+    float moveMe = 0;
 
     //Declare a new delegate type
-    public delegate void WeaponFireDelegate() ;
+    public delegate void WeaponFireDelegate();
     //Create the actual delegate
     public WeaponFireDelegate fireDelegate;
     // Use this for initialization
@@ -22,22 +23,53 @@ public class Ship : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         float xAxis = Input.GetAxis("Horizontal");
         float yAxis = Input.GetAxis("Vertical");
+        if (Input.GetKey("right"))
+        {
+            tiltMe += -xAxis * 5;
+        }
+        if (Input.GetKey("left"))
+        {
+            tiltMe += -xAxis * 5;
+        }
+
+
+        if (Input.GetKey("up"))
+        {
+            transform.position += transform.up * Time.deltaTime * speed ;
+        }
+
+
 
         Vector3 pos = transform.position;
-        pos.x += xAxis * speed * Time.deltaTime;
-        pos.y += yAxis * speed * Time.deltaTime;
-        transform.position = pos;
-        transform.rotation = Quaternion.Euler(yAxis * pitchMult, xAxis * rollMult, 0f);
+        Quaternion target = Quaternion.Euler(0, 0, tiltMe);
+
+
+       
+        
+
+        transform.rotation = target;
+
 
         if (Input.GetAxis("Jump") == 1 && fireDelegate != null)
         {
             fireDelegate();
         }
     }
+
+    private void OnBecameVisible()
+    {
+        
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(collision.gameObject);
+        if (collision.gameObject.name != "wall")
+        {
+            Destroy(this.gameObject);
+
+        }
+
     }
 }

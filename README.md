@@ -1,1 +1,1 @@
-Git SHMUP
+SHMUP2.0
