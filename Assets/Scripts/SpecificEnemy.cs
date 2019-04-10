@@ -16,7 +16,13 @@ public class SpecificEnemy : Enemy {
 	// Update is called once per frame
 	void Update () {
         Move();
-	}
+        if ((transform.position.y < -5))
+        {
+            manager.SendMessage("life");
+
+            Destroy(this.gameObject);
+        }
+    }
 
     protected override void Move()
     {

@@ -1844,8 +1844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sound: {fileID: 0}
   music: {fileID: 0}
-  basket: {fileID: 0}
-  thud: {fileID: 8300000, guid: 6865c34f21c8e7d4fb3f4c2ca692a6e6, type: 3}
+  boom: {fileID: 0}
   tracker: {fileID: 5031123294481417692}
   LifeTracker: {fileID: 5031123294552877189}
 --- !u!1 &5031123294481417691
@@ -2152,7 +2151,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000061035156, y: -62}
+  m_AnchoredPosition: {x: 945, y: -62}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5031123294627347004

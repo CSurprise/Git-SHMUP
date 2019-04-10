@@ -8,7 +8,7 @@ public class Ship : MonoBehaviour
     public float speed = .1f;
     public float tilt = 360.0f;
     float tiltMe = 0;
-    float moveMe = 0;
+
 
     //Declare a new delegate type
     public delegate void WeaponFireDelegate();
@@ -65,11 +65,9 @@ public class Ship : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name != "wall")
-        {
-            Destroy(this.gameObject);
+        
+     
 
-        }
 
     }
 }

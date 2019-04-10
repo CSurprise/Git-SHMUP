@@ -79,7 +79,7 @@ public class score : MonoBehaviour
             }
         }
 
-        if (lives + Score == 30 || !GameObject.Find("Ship"))
+        if (lives + Score == 31 || !GameObject.Find("Ship"))
         {
             if (Score > PlayerPrefs.GetInt("high score 1"))
             {

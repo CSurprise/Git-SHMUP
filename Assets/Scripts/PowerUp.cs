@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUp : MonoBehaviour {
+public class PowerUp : MonoBehaviour
+{
     public Rigidbody2D rb;
     SpriteRenderer rend;
     WeaponStyle _style;
@@ -20,14 +21,16 @@ public class PowerUp : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
     public void SetStyle(WeaponStyle s)
     {
         _style = s;
@@ -35,6 +38,6 @@ public class PowerUp : MonoBehaviour {
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(collision.gameObject);
+    
     }
 }

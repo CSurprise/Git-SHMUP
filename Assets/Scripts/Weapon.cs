@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum WeaponStyle { none, blaster }
+public enum WeaponStyle { none, blaster, spread, laser }
 
 [System.Serializable]
 public class WeaponDefinition
@@ -84,6 +84,23 @@ public class Weapon : MonoBehaviour
                 p.rb.velocity = def.velocity * transform.up;
                 audio.Play();
                 break;
+            case WeaponStyle.spread:
+                p = MakeProjectile();
+                p.rb.velocity = def.velocity * transform.up;
+                audio.Play();
+                p = MakeProjectile();
+                p.rb.velocity = Quaternion.Euler(0f, 0f, -40f) * transform.up * def.velocity;
+                audio.Play();
+                p = MakeProjectile();
+                p.rb.velocity = Quaternion.Euler(0f, 0f, 40f) * transform.up * def.velocity;
+                audio.Play();
+                break;
+            case WeaponStyle.laser:
+                p = MakeProjectile();
+                p.rb.velocity = def.velocity * transform.up;
+                audio.pitch = 2.5f;
+                audio.Play();
+                break;
         }
 
 
@@ -101,5 +118,32 @@ public Projectile MakeProjectile()
     return (p);
 }
 
+    public PowerUp Makepowerup()
+    {
+        GameObject go = Instantiate(def.Powerupprefab, spawnPoint.position, Quaternion.identity);
+
+        //set the layer!
+        PowerUp pu = go.GetComponent<PowerUp>();
+        pu.style = style;
+
+        go.layer = LayerMask.NameToLayer("Enemy Projectile");
+        return (pu);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "spreadToken")
+        {
+            SetStyle(WeaponStyle.spread);
+        }
+        if (collision.gameObject.name == "blasterToken")
+        {
+            SetStyle(WeaponStyle.blaster);
+        }
+        if (collision.gameObject.name == "laserToken")
+        {
+            SetStyle(WeaponStyle.laser);
+        }
+    }
 }
 

@@ -55,6 +55,7 @@ public class Projectile : MonoBehaviour
     {
         explosion.Play();
         sound.PlayOneShot(thud);
+     
         Destroy(collision.gameObject);
         manager.SendMessage("counter");
         
